@@ -31,8 +31,14 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    //user는 여러개의 post를 가질 수 있음
     @OneToMany(mappedBy = "user")
     List<Post> postList = new ArrayList<>();
+
+    //user는 여러개의 comment를 가질 수 있음
+    @OneToMany(mappedBy = "user")
+    List<Comment> commentList = new ArrayList<>();
+
 
     public void addPostList(Post post){
         this.postList.add(post);
