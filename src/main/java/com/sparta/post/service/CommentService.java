@@ -8,6 +8,7 @@ import com.sparta.post.repository.CommentRepository;
 import com.sparta.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,5 +25,31 @@ public class CommentService {
         );
         Comment comment = new Comment(user,post, requestDto);
         commentRepository.save(comment);
+    }
+
+    @Transactional
+    public void updateComment(Long commentId, CommentRequestDto requestDto, User user) {
+
+        Comment foundedComment = commentRepository.findById(commentId).orElseThrow(
+                () -> new IllegalArgumentException("댓글이 존재하지 않습니다.")
+        );
+
+        if(foundedComment.getUser().getUsername().equals(user.getUsername())){
+            foundedComment.update(requestDto);
+        }else{
+            throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
+        }
+    }
+
+    public void deleteComment(Long commentId,User user) {
+        Comment foundedComment = commentRepository.findById(commentId).orElseThrow(
+                () -> new IllegalArgumentException("댓글이 존재하지 않습니다.")
+        );
+
+        if(foundedComment.getUser().getUsername().equals(user.getUsername())){
+            commentRepository.delete(foundedComment);
+        }else{
+            throw new IllegalArgumentException("작성자만 삭제할 수 있습니다.");
+        }
     }
 }

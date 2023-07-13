@@ -31,6 +31,27 @@ public class CommentController {
         return redirectView;
     }
 
+    @PutMapping("/comments/{commentId}")
+    public RedirectView updateComment(RedirectAttributes attributes, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        commentService.updateComment(commentId, requestDto, userDetails.getUser());
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/api/posts");
+        return redirectView;
+    }
+
+    @DeleteMapping("/comments/{commentId}")
+    public RedirectView deleteComment(
+            RedirectAttributes attributes,
+            @PathVariable Long commentId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+        commentService.deleteComment(commentId, userDetails.getUser());
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/api/posts");
+        return redirectView;
+
+    }
+
 
 
 

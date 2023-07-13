@@ -5,6 +5,7 @@ import com.sparta.post.dto.PostRequestDto;
 import com.sparta.post.dto.PostResponseDto;
 import com.sparta.post.entity.Post;
 import com.sparta.post.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.sparta.post.repository.PostRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 @Service
+@Slf4j
 public class PostService {
 
     PostRepository postRepository;

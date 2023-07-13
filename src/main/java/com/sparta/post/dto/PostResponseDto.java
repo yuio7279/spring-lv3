@@ -20,7 +20,6 @@ public class PostResponseDto {
     private LocalDateTime modifiedAt;
     private String msg;
 
-    private User user;
     private List<Comment> commentList;
 
     public PostResponseDto(Post post) {
@@ -31,7 +30,6 @@ public class PostResponseDto {
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
         this.commentList = post.getCommentList();
-        this.user = post.getUser();
     }
 
     public void setMsg(String msg){

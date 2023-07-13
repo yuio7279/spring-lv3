@@ -1,4 +1,4 @@
-package com.sparta.post.comment;
+package com.sparta.post;
 
 
 import com.sparta.post.dto.CommentRequestDto;
