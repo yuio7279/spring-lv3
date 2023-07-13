@@ -1,9 +1,11 @@
 package com.sparta.post.dto;
 
+import com.sparta.post.entity.Comment;
 import com.sparta.post.entity.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 
@@ -16,6 +18,7 @@ public class PostResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private String msg;
+    private List<Comment> commentList;
 
     public PostResponseDto(Post post) {
         this.id=  post.getId();
@@ -24,6 +27,7 @@ public class PostResponseDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
+        this.commentList = post.getCommentList();
     }
 
     public void setMsg(String msg){
