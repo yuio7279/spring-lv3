@@ -40,18 +40,15 @@ public class CommentTest {
                 ()->new NullPointerException("아이디가 업습니다."));
 
         //포스트 작성
-        Post post = new Post();
-        post.setTitle("제목1");
-        post.setContent("내용1");
-        post.setPassword("1234");
-        post.setUserName(user.getUsername());
-
+        Post post = new Post(new PostRequestDto("제목1","1234","내용1"));
 
         post.setUser(user);
         postRepository.save(post);
 
         //댓글 작성
-        Comment comment = new Comment(user, post, requestDto);
+        Comment comment = new Comment(requestDto);
+        comment.setUser(user);
+        comment.setPost(post);
         commentRepository.save(comment);
 
         //댓글 조회하기

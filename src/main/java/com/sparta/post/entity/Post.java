@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "post")
 @NoArgsConstructor
@@ -44,6 +43,10 @@ public class Post extends Timestamped {
         this.userName = postRequestDto.getUserName();
         this.password = postRequestDto.getPassword();
         this.content = postRequestDto.getContent();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void update(PostRequestDto postRequestDto) {

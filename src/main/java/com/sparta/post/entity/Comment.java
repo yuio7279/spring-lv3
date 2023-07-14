@@ -4,10 +4,8 @@ import com.sparta.post.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "comment")
 @NoArgsConstructor
@@ -20,17 +18,23 @@ public class Comment extends Timestamped{
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id")
     private Post post;
 
-    public Comment(User user, Post post, CommentRequestDto requestDto) {
-        this.user = user;
-        this.post = post;
+    public Comment(CommentRequestDto requestDto) {
         this.content = requestDto.getContent();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public void update(CommentRequestDto requestDto) {

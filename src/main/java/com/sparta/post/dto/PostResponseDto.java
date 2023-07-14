@@ -1,8 +1,6 @@
 package com.sparta.post.dto;
 
-import com.sparta.post.entity.Comment;
 import com.sparta.post.entity.Post;
-import com.sparta.post.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -20,7 +18,7 @@ public class PostResponseDto {
     private LocalDateTime modifiedAt;
     private String msg;
 
-    private List<Comment> commentList;
+    private List<CommentResponseDto> commentList;
 
     public PostResponseDto(Post post) {
         this.id=  post.getId();
@@ -29,7 +27,7 @@ public class PostResponseDto {
         this.content = post.getContent();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
-        this.commentList = post.getCommentList();
+        this.commentList = post.getCommentList().stream().map(CommentResponseDto::new).toList();
     }
 
     public void setMsg(String msg){

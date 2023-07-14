@@ -23,7 +23,9 @@ public class CommentService {
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new IllegalArgumentException("게시글이 존재하지 않습니다.")
         );
-        Comment comment = new Comment(user,post, requestDto);
+        Comment comment = new Comment(requestDto);
+        comment.setUser(user);
+        comment.setPost(post);
         commentRepository.save(comment);
     }
 
